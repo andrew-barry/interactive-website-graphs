@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Stacked Area Chart from CSV</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
+</head>
+<body>
+  <h2 style="text-align: center;">Interactive Stacked Area Chart</h2>
+  <div id="chart" style="width: 100%; max-width: 1000px; height: 600px; margin: auto;"></div>
+
+  <script>
+    // Path to your CSV file (if local)
+    // const csvUrl = 'inputs/test_graphic_csv.csv';
+
+    // Path to your CSV file (hosted online - using github in this case)
+    const csvUrl = 'https://raw.githubusercontent.com/andrew-barry/interactive-website-graphs/refs/heads/main/inputs/test_graphic_csv.csv';
+
+    Papa.parse(csvUrl, {
+      download: true,
+      header: true,
+      dynamicTyping: true,
+      complete: function(results) {
+        const data = results.data;
+
+        const years = data.map(row => row['Year']);
+
+        const categories = Object.keys(data[0]).filter(k => k !== 'Year');
+
+        const traces = categories.map(cat => ({
+          x: years,
+          y: data.map(row => row[cat]),
+          name: cat,
+          type: 'scatter',
+          mode: 'none',
+          stackgroup: 'one'
+        }));
+
+        const layout = {
+          title: 'Energy Use by Source (from CSV)',
+          xaxis: { title: 'Year' },
+          yaxis: { title: 'Energy Output', hoverformat: '.2f' },
+          hovermode: 'x unified'
+        };
+
+        Plotly.newPlot('chart', traces, layout);
+      }
+    });
+  </script>
+</body>
+</html>
