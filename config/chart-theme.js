@@ -39,6 +39,20 @@ window.REGEN_THEME = {
     },
     paper_bgcolor: '#f6f4ee',
     plot_bgcolor: '#f6f4ee',
-    hovermode: 'x unified'
+    hovermode: 'x unified',
+    images: [
+      {
+        source: "andrew-barry.github.io/interactive-website-graphs/images/regen_logo_dark.png",
+        xref: "paper",
+        yref: "paper",
+        x: 1,
+        y: 0,
+        sizex: 0.2,
+        sizey: 0.2,
+        xanchor: "right",
+        yanchor: "bottom",
+        opacity: 1,
+        layer: "above"
+      }]
   }
 };
