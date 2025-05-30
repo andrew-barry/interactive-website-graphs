@@ -42,7 +42,7 @@ window.REGEN_THEME = {
     hovermode: 'x unified',
     images: [
       {
-        source: "andrew-barry.github.io/interactive-website-graphs/images/regen_logo_dark.png",
+        source: "https://andrew-barry.github.io/interactive-website-graphs/images/regen_logo_dark.png",
         xref: "paper",
         yref: "paper",
         x: 1,
