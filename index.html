@@ -1,125 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Styled Regen Chart</title>
+  <meta charset="UTF-8">
+  <title>Regen Chart</title>
+  <link rel="stylesheet" href="config/style.css" />
+  <link rel="stylesheet" href="config/font.css" />
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,600&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'IBM Plex Sans', sans-serif;
-      background: #f6f4ee;
-      padding: 30px;
-    }
-    #chart-title {
-      font-weight: 600;
-      font-size: 16pt;
-      color: #004d4d; /* Regen teal */
-      margin-bottom: 0;
-    }
-    #chart-subtitle {
-      font-size: 12pt;
-      color: #004d4d;
-      margin-top: 0;
-    }
-    #source {
-      font-size: 10pt;
-      color: #444;
-      font-family: 'IBM Plex Sans', sans-serif;
-      margin-top: 10px;
-    }
-    .figure-reference {
-      font-size: 10pt;
-      font-family: 'IBM Plex Sans', sans-serif;
-      text-decoration: underline;
-      color: #004d4d;
-    }
-  </style>
+  <script src="config/chart-theme.js"></script>
 </head>
 <body>
-  <h2 style="text-align: center;">Interactive Stacked Area Chart</h2>
-  <div id="chart" style="width: 100%; max-width: 1000px; height: 600px; margin: auto;"></div>
+  <div class="figure-reference">Chart title – key takeaway</div>
+  <h1 id="chart-title">Generation Capacity by Source</h1>
+  <p id="chart-subtitle">2022-2050 projection</p>
+  <div id="chart"></div>
+  <p id="source">Source: Regen analysis, 2024</p>
 
-  <script>
-    // Path to your CSV file (if local)
-    // const csvUrl = 'inputs/test_graphic_csv.csv';
-
-    // Path to your CSV file (hosted online - using github in this case)
-    const csvUrl = 'https://raw.githubusercontent.com/andrew-barry/interactive-website-graphs/refs/heads/main/inputs/test_graphic_csv.csv';
-
-    Papa.parse(csvUrl, {
-      download: true,
-      header: true,
-      dynamicTyping: true,
-      complete: function(results) {
-        const data = results.data;
-
-        const years = data.map(row => row['Year']);
-
-        const categories = Object.keys(data[0]).filter(k => k !== 'Year');
-
-        const traces = categories.map(cat => ({
-          x: years,
-          y: data.map(row => row[cat]),
-          name: cat,
-          hoverinfo: 'x+y+name',
-          line: {width: 0.5},
-          type: 'scatter',
-          mode: 'none',
-          stackgroup: 'one',
-          fill: 'tonexty'
-        }));
-
-        const layout = {
-          title: 'Generation capacity',
-          xaxis: { title: 'Year' },
-          yaxis: { title: 'Capacity (MW)', hoverformat: '.2f' },
-          hovermode: 'x unified'
-        };
-
-        Plotly.newPlot('chart', traces, {
-          margin: { t: 20 },
-          xaxis: {
-            title: 'Year',
-            tickfont: {
-              family: 'IBM Plex Mono',
-              size: 10.5,
-              color: '#444'
-            },
-            titlefont: {
-              family: 'IBM Plex Mono',
-              size: 10.5,
-              color: '#444'
-            }
-          },
-          yaxis: {
-            title: 'Value',
-            tickfont: {
-              family: 'IBM Plex Mono',
-              size: 10.5,
-              color: '#444'
-            },
-            titlefont: {
-              family: 'IBM Plex Mono',
-              size: 10.5,
-              color: '#444'
-            }
-          },
-          showlegend: true,
-          legend: {
-            font: {
-              family: 'IBM Plex Sans',
-              size: 12,
-              color: '#444'
-            }
-          },
-          paper_bgcolor: '#f6f4ee',
-          plot_bgcolor: '#f6f4ee',
-        });
-      }
-    });
-
-  </script>
+  <script src="scripts/chart.js"></script>
 </body>
 </html>

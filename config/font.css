@@ -1,0 +1,13 @@
+/* Import Aptos alternatives */
+/* consider how to get actual Aptos*/
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono&display=swap');
+
+/* Font roles mapped to Regen spec */
+:root {
+  --font-title: 'IBM Plex Sans', sans-serif;       /* Substitute for Aptos Semibold */
+  --font-subtitle: 'IBM Plex Sans', sans-serif;    /* Aptos Regular */
+  --font-figure-ref: 'IBM Plex Sans', sans-serif;  /* Aptos Narrow */
+  --font-axis: 'IBM Plex Mono', monospace;         /* Aptos Mono */
+  --font-source: 'IBM Plex Sans', sans-serif;      /* Aptos Regular */
+  --font-label: 'IBM Plex Sans', sans-serif;       /* Aptos Semibold */
+}
