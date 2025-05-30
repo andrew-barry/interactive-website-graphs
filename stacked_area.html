@@ -11,8 +11,11 @@
   <div id="chart" style="width: 100%; max-width: 1000px; height: 600px; margin: auto;"></div>
 
   <script>
-    // Path to your CSV file (must be hosted and accessible)
-    const csvUrl = 'inputs/test_graphic_csv.csv';
+    // Path to your CSV file (if local)
+    // const csvUrl = 'inputs/test_graphic_csv.csv';
+
+    // Path to your CSV file (hosted online - using github in this case)
+    const csvUrl = 'https://raw.githubusercontent.com/andrew-barry/interactive-website-graphs/refs/heads/main/inputs/test_graphic_csv.csv';
 
     Papa.parse(csvUrl, {
       download: true,
