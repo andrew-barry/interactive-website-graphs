@@ -2,9 +2,40 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Stacked Area Chart from CSV</title>
+  <title>Styled Regen Chart</title>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,600&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+      background: #f6f4ee;
+      padding: 30px;
+    }
+    #chart-title {
+      font-weight: 600;
+      font-size: 16pt;
+      color: #004d4d; /* Regen teal */
+      margin-bottom: 0;
+    }
+    #chart-subtitle {
+      font-size: 12pt;
+      color: #004d4d;
+      margin-top: 0;
+    }
+    #source {
+      font-size: 10pt;
+      color: #444;
+      font-family: 'IBM Plex Sans', sans-serif;
+      margin-top: 10px;
+    }
+    .figure-reference {
+      font-size: 10pt;
+      font-family: 'IBM Plex Sans', sans-serif;
+      text-decoration: underline;
+      color: #004d4d;
+    }
+  </style>
 </head>
 <body>
   <h2 style="text-align: center;">Interactive Stacked Area Chart</h2>
@@ -32,9 +63,12 @@
           x: years,
           y: data.map(row => row[cat]),
           name: cat,
+          hoverinfo: 'x+y+name'
+          line: {width: 0.5},
           type: 'scatter',
           mode: 'none',
-          stackgroup: 'one'
+          stackgroup: 'one',
+          fill: 'tonexty'
         }));
 
         const layout = {
@@ -44,9 +78,48 @@
           hovermode: 'x unified'
         };
 
-        Plotly.newPlot('chart', traces, layout);
+        Plotly.newPlot('chart', traces, {
+          margin: { t: 20 },
+          xaxis: {
+            title: 'Year',
+            tickfont: {
+              family: 'IBM Plex Mono',
+              size: 10.5,
+              color: '#444'
+            },
+            titlefont: {
+              family: 'IBM Plex Mono',
+              size: 10.5,
+              color: '#444'
+            }
+          },
+          yaxis: {
+            title: 'Value',
+            tickfont: {
+              family: 'IBM Plex Mono',
+              size: 10.5,
+              color: '#444'
+            },
+            titlefont: {
+              family: 'IBM Plex Mono',
+              size: 10.5,
+              color: '#444'
+            }
+          },
+          showlegend: true,
+          legend: {
+            font: {
+              family: 'IBM Plex Sans',
+              size: 12,
+              color: '#444'
+            }
+          },
+          paper_bgcolor: '#f6f4ee',
+          plot_bgcolor: '#f6f4ee',
+        });
       }
     });
+
   </script>
 </body>
 </html>
